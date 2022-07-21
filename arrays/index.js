@@ -138,34 +138,34 @@
 // найдите количество элементов массива, которые отличны от наибольшего 
 // не больше чем на 10%
 
-const arr = [1, 32, 54, 100, 19, 89, 75, 45, 99, 111];
+// const arr = [1, 32, 54, 100, 19, 89, 75, 45, 99, 111];
 
-let max = arr[0];
+// let max = arr[0];
 
-let counter = 0;
+// let counter = 0;
 
-for (let i = 0; i < arr.length; i++) {
-    if (arr[i] > max) {
-        max = arr[i]
-    }
-}
+// for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] > max) {
+//         max = arr[i]
+//     }
+// }
 
-for (let j = 0; j < arr.length; j++) {
-    if (arr[j] >= 0.9 * max) {
-        counter++;
-    }
-}
-console.log(counter);
+// for (let j = 0; j < arr.length; j++) {
+//     if (arr[j] >= 0.9 * max) {
+//         counter++;
+//     }
+// }
+// console.log(counter);
 
 // 10. дан массив из 10 случайных чисел (НЕ ПОСЛЕДОВАТЕЛЬНЫХ)
 // выведите на экран наибольший ЧЕТНЫЙ элемент массива
 
-const arr = [1, 32, 54, 100, 19, 89, 75, 45, 99, 78];
+const arr = [1, -3, -4, -101, -19, -89, -75, -45, -99, -7];
 
-let max = arr[0];
+let max = 0;
 
-for (let i = 0; i < arr.length; i+2) {
-    if (arr[i] > max) {
+for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
         max = arr[i]
     }
 }
@@ -175,19 +175,19 @@ console.log(max);
 // пользователь вводит число n, вывести в консоль элемент массива
 // который наиболее близок к n (если таких элементов несколько, вывести несколько)
 
-const arr = [1, 32, 54, 100, 19, 89, 75, 45, 99, 78];
+// const arr = [1, 32, 54, 100, 19, 89, 75, 45, 99, 78];
 
-let userInput = +prompt('enter number');
+// let userInput = +prompt('enter number');
 
-let diff = arr[i] / userInput;
+// let diff = arr[i] / userInput;
 
-const near;
+// const near;
 
-for (let i = 0; i < arr.length; i++) {
+// for (let i = 0; i < arr.length; i++) {
 
-    if (arr[i] / userInput < diff) {
-        diff = arr[i] / userInput;
-        near = arr[i];
-    }
-}
-console.log (near);
+//     if (arr[i] / userInput < diff) {
+//         diff = arr[i] / userInput;
+//         near = arr[i];
+//     }
+// }
+// console.log (near);
