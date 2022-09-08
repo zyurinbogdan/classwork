@@ -17,14 +17,14 @@
 // console.log(toggleMe());
 // console.log(toggleMe());
 
-let switcher = () => {
-    let a = true;
-    return () => a = !a;
-}
-let toggleMe = switcher();
-console.log(toggleMe());
-console.log(toggleMe());
-console.log(toggleMe());
+// let switcher = () => {
+//     let a = true;
+//     return () => a = !a;
+// }
+// let toggleMe = switcher();
+// console.log(toggleMe());
+// console.log(toggleMe());
+// console.log(toggleMe());
 
 // 2. Создать функцию funcCounter(), которая способна
 // считать количество своих вызовов. Если передать в эту
@@ -33,25 +33,28 @@ console.log(toggleMe());
 // если передать число больше 10, то функция считает
 // количество от этого числа до 0
 
-// function count (num) {
+// function count () {
 //     let count = 0;
-//     return function () {
-//         if (num > 10) {
-//             return ++count;
-//         } else {
-//             --count;
-//             if (num <= 0) {
-//                 return 0;
-//             } else {
+//     let userNum;
+//     return function (num) {
+//         if (num !== undefined) {
+//             userNum = num;
+//         } else if (num === undefined){
+//             if (userNum === 0) {
 //                 return count;
+//             } else if (userNum <= 10) {
+//                 return ++count;
+//             } else if (userNum > 10) {
+//                 return --count;
 //             }
 //         }
+        
 //     }
+
 // }
 
-// let funcCounter = count(10);
-
-// console.log(funcCounter());
+// let funcCounter = count();
+// console.log(funcCounter(100));
 // console.log(funcCounter());
 // console.log(funcCounter());
 // console.log(funcCounter());
@@ -109,12 +112,118 @@ console.log(toggleMe());
 // должна каждый элемент массива обрабатывать callback’ом.
 
 // function foo (arr, cb) {
-//     return arr.map(cb);
+//     let arr1 = [];
+//     for (let i = 0; i < arr.length; i++) {
+//         arr1.push(cb(arr[i]));
+//     }
+
+//     return arr1;
 // }
 
 // function cb (item) {
 //     item = item * 2;
 //     return item;
 // }
-// console.log(foo([1, 2, 3], cb));
+// console.log(foo([1, 2, 4], cb));
 // сделать через фор
+
+// 3. Создать функцию classNameEditor(), которая
+// принимает строку с названием класса и добавляет
+// его в класс, если вторым параметром было
+// передано true, если вторым параметром было
+// передано false, то функция пытается удалить из
+// класса переданное имя. Если удаление не было
+// совершено, то просто вернуть строку с названием
+// класса. Функция должна возвращать текущее
+// название класса.
+
+// classNameEditor('active', true) // добавляем класс ====>>>>> 'active'
+// classNameEditor('test', true) // =====>>>>> 'active test'
+// classNameEditor('btn', true) // =====>>>>> 'active test btn'
+// classNameEditor('test', false) // =====>>>>> 'active btn'
+// classNameEditor('blabla', false) // =====>>>>> 'active btn'
+
+// .split()
+// .join()
+
+
+// function addOrDelClass () {
+//     let classArr = [];
+//     return function (className, shouldAdd) {
+//         if (shouldAdd) {
+//             if (!classArr.includes(className)){
+//                 classArr.push(className);
+//             }
+//         } else {
+//             if(classArr.includes(className)) {
+//                 classArr.splice(classArr.indexOf(className), 1);
+//             }
+//         }
+//         let classStr = classArr.join(' ');
+//         return classStr;
+//     }
+// }
+// let classNameEditor = addOrDelClass();
+// console.log(classNameEditor('btn', true));
+// console.log(classNameEditor('active', true));
+// console.log(classNameEditor('btn', true));
+// console.log(classNameEditor('test', true));
+// console.log(classNameEditor('btn', false));
+
+
+// 7. Создать объект 
+// kurochka = {
+// 	name: 'Ryaba',
+// 	isAlive: true,
+// 	isZazharena: false
+// }
+
+// измените объект так, чтобы после изменения поля isZazharena = true, поле isAlive автоматически стало false, 
+// поле isAlive должно быть доступно только для чтения. После изменения isZazharena - это поле должно стать доступно только для чтения
+
+
+
+const kurochka = {
+    name: 'Ryaba',
+    isAlive: true,
+    _isZazharena: false
+};
+
+
+Object.defineProperty(kurochka, 'isAlive', {
+    writable: false
+});
+
+Object.defineProperty(kurochka, '_isZazharena', {
+    writable: true,
+    enumerable: false,
+    configurable: false
+});
+
+Object.defineProperty(kurochka, 'isZazharena', {
+    set (val) {
+        if (val && !this._isZazharena) {
+            this._isZazharena = val;
+
+            Object.defineProperty(this, 'isAlive', {
+                writable: true
+            });
+
+            this.isAlive = false;
+
+            Object.defineProperty(this, 'isAlive', {
+                writable: false,
+                configurable: false
+            })
+        }
+    },
+    get () {
+        return this._isZazharena;
+    }
+});
+
+
+kurochka.isZazharena = true;
+kurochka.isAlive = true;
+
+console.log(kurochka);
