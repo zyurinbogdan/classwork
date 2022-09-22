@@ -1,43 +1,154 @@
-//event loop
-//promise
-//async await
 
-console.log(1)
+// let result;
 
-setTimeout(() => {
-    console.log(2);
-}, 1000)
+// const arr = new Array(1,2,3,4).slice(2,5).slice(1,6)
 
-console.log(3)
+// const pr = new Promise((resolve, reject) => {
+//     console.log(1);
+//     resolve(20);
+// })
+// .then((res) => {
+//     console.log(res);
+//     return res + 'bla';
+// })
+// .catch((err) => {
+//     console.log('SOME ERROR OCCURED', err);
+
+//     return 100;
+// })
+// .then((res) => {
+//     console.log(res);
+   
+//     return res + 'smth';
+// })
+// .then((res) => {
+//     console.log(res);
+//     return res;
+// })
+// .catch((err) => {
+//     console.log('SECOND CATCH');
+//     return 499;
+// })
+// .finally(() => {
+//     console.log('THIS IS FINALLY');
+//     // throw 222;
+//     return 999;
+// })
+// .catch((err) => {
+//     console.log('AFTER FINALLY WAS REJECTED', err);
+// })
+// .then((data) => {
+//     console.log('THEN AFTER FINALLY', data);
+// })
+
+// console.log(pr);
+
+// new Promise((resolve) => {
+//     setTimeout(() => {
+//         console.log('one');
+//         resolve();
+//     }, Math.random() * 1000);
+// })
+// .then(() => {
+//     return new Promise((resolve) => {
+//         setTimeout(() => {
+//             console.log('two');
+//             resolve(200);
+//         }, 2000);
+//     })
+//     .then((data) => {
+//         throw 2;
+//         return 300;
+//     })
+//     .catch(() => {
+//         console.log('TEST CATCH');
+//         throw 3;
+//     })
+// })
+// .catch(() => {
+//     console.log('SOME CATCH');
+// })
+// .then((data) => {
+//     console.log(data);
+
+//     setTimeout(() => {
+//         console.log('three');
+//     }, 1000);
+// })
 
 
-//https://www.youtube.com/watch?v=6XyifyzmSMM
-//https://www.youtube.com/watch?v=M7WpAbG0rAA
-//https://www.youtube.com/watch?v=u1kqx6AenYw
+// const p1 = new Promise((res, rej) => 
+//     setTimeout(() => rej(1), 500));
+// const p2 = new Promise((rej, rej) => 
+//     setTimeout(() => rej(2), 1000));
+// const p3 = new Promise((res, rej) => 
+//     setTimeout(() => rej(3), 700));
 
-//АРЧИБАЛЬД
-//https://www.youtube.com/watch?v=cCOL7MC4Pl0
+// Promise.all([p1,p2,p3])
+// .then((res) => {
+//     console.log('AFTER ALL PROMISES', res);
+// })
 
-// PROMISE - ЭТО ВОЗМОЖНОСТЬ ПИСАТЬ АСИНХРОННЫЙ КОД СИНХРОННО
+// Promise.allSettled([p1,p2,p3])
+// .then((data) => {
+//     console.log(data);
+// })
 
-const pr = new Promise((resolve, reject) => {
-    resolve('result')
-}).then((res) => {       //один аргумент,  если здесь случится ошибка, то он будет reject
-    console.log(res)
-    return res
-}).then((res) => {
-    console.log(res)
-})            //сам инстанс не понадобится, эта функция выполняется !синхронно!
+// Promise.race([p1,p2,p3])
+// .then((data) => {
+//     console.log(data);
+// })
 
-//resolve - все закончилось хорошо
-//reject - все плохо
+// Promise.any([p1,p2,p3])
+// .then((data) => {
+//     console.log(data);
+// })
 
 
-// 'pending' - процеес ожидания
-// 'fulfilled' - завершен успешно  
-// 'reject'  - неуспешно
 
-//методы promise
-//promise возвращает promise
-//then врзвращает promise
-//это два Разных promise
+// async await
+
+// const foo2 = async function () {};
+// async function foo3 () {}
+
+// const p1 = new Promise((res, rej) => {
+//     setTimeout(() => {
+//         rej(10);
+//         // throw new Error();
+//     }, 1000);
+// })
+
+
+// const foo = async () => {
+
+//     let result = await p1;
+
+    // try {
+    //     result = await p1;
+    // } catch (err) {
+    //     console.log(err);
+    // }
+  
+    // throw new Error(12);
+
+//     console.log('HI!', result);
+
+//     console.log('FINALLY');
+    
+//     return result;
+// };
+
+// foo()
+// .catch((err) => {
+//     console.log(err);
+// });
+
+
+// const bar = async () => {
+//     const obj = await foo();
+// };
+
+
+
+
+
