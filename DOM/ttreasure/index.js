@@ -1,21 +1,31 @@
 //*1. спрятать клад
-//2. получить координаты клика
-//3. выяснить расстояние от координат клика до сокровища
-//4. градация тепло-холодно
-//5. подсказки
+//*2. получить координаты клика
+//*3. выяснить расстояние от координат клика до сокровища
+//*4. градация тепло-холодно
+//*5. подсказки
 //*6. показать сокровище
 
 
 
 
 const mapWrapper = document.getElementById('mapWrapper');
-
-mapWrapper.addEventListener('click', ({layerX, layerY}) => {
-    const clickCooed = {
-        x: layerX,
-        y: layerY
+const hintElement = document.getElementById('hint');
+const gameHandler = ({offsetX, offsetY, currentTarget}) => {
+    const clickCoords = {
+        x: offsetX,
+        y: offsetY
     };
-})
+
+    const distanceToTreasure = treasure.getLengthTo(clickCoords);
+    const hint = treasure.getHintByLength(distanceToTreasure);
+    if (hint === TreasureWithHints.hints[0]) {
+        treasure.show();
+        currentTarget.removeEventListener('click', gameHandler);
+    }
+    hintElement.innerText = hint;
+    
+}
+mapWrapper.addEventListener('click', gameHandler) 
 
 class Treasure {
     static IMAGE_URL = './img/chest.png'
@@ -55,13 +65,42 @@ class Treasure {
 
     getLengthTo ({x, y}) {
 
-        const katet1Length = this.coord.x - x;
-        const katet2Length = this.coord.y - y;
+        const katet1Length = this.coords.x - x;
+        const katet2Length = this.coords.y - y;
 
-        return Math.round(Math.sqrt(katet1Length**2 - katet2Length**2));
+        return Math.round(Math.sqrt(katet1Length**2 + katet2Length**2));
     }
 }
 
-const treasure = new Treasure(mapWrapper);
-treasure.show();
-console.log(treasure)
+
+
+class TreasureWithHints extends Treasure {
+    
+    static hints = [
+        'Treasure found',
+        'HOT!',
+        'WARM!',
+        'COLD!',
+        'WINTER IS COMING!'
+    ];
+
+    constructor (parent) {
+        super(parent);
+    }
+
+    getHintByLength (length) {
+        if (length < 30) {
+            return TreasureWithHints.hints[0];
+        } else if (length < 60) {
+            return TreasureWithHints.hints[1];
+        } else if (length < 90) {
+            return TreasureWithHints.hints[2];
+        } else if (length < 120) {
+            return TreasureWithHints.hints[3];
+        } else {
+            return TreasureWithHints.hints[4];
+        }
+    }
+}
+
+const treasure = new TreasureWithHints(mapWrapper);
